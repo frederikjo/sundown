@@ -6,8 +6,10 @@ import { Home } from "./screens/home";
 export const Main = () => {
   return (
     <ScreenClassProvider>
-      <Nav />
-      <Home />
+      <main>
+        <Nav />
+        <Home />
+      </main>
     </ScreenClassProvider>
   );
 };

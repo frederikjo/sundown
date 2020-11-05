@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyledButton } from "./styles";
+import { StyledButton } from "../styles";
 
 interface ButtonProps {
   theme: "primary" | "secondary";

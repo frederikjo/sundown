@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyledParagraph } from "./styles";
+import { StyledParagraph } from "../styles";
 
 interface ParagraphProps {
   weight: "light" | "bold";

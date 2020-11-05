@@ -7,13 +7,16 @@ export const StyledButton = styled.a<{
 }>`
   display: flex;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 12px;
   color: #fff;
+  width: 150px;
   border: none;
   cursor: pointer;
   outline: none;
   padding: 5px 10px;
   font-weight: 600;
+  text-transform: uppercase;
+  transition: 0.1s all;
 
   ${({ theme }) =>
     theme === "primary"
@@ -58,4 +61,9 @@ export const StyledCard = styled.div`
 export const StyledImage = styled.img<{ width?: number; height?: number }>`
   width: ${({ width }) => (width ? `${width}px` : "100%")};
   height: ${({ height }) => (height ? `${height}px` : "100%")};
+`;
+
+export const StyledInput = styled.input`
+  width: 100%;
+  padding: 5px;
 `;

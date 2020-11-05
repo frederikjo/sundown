@@ -14,5 +14,5 @@ export const Recipes = async () => {
   } catch (error) {
     console.error(error);
   }
-  return result;
+  return result && result.data;
 };

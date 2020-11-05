@@ -1,5 +1,5 @@
 import React, { FC, memo } from "react";
-import { StyledImage } from "./styles";
+import { StyledImage } from "../styles";
 
 interface ImgProps {
   src?: string;
