@@ -1,10 +1,13 @@
 import React from "react";
-import { Nav } from "./Navigation/nav";
+import { ScreenClassProvider } from "react-grid-system";
+import { Nav } from "./navigation/nav";
+import { Home } from "./screens/home";
 
 export const Main = () => {
   return (
-    <>
+    <ScreenClassProvider>
       <Nav />
-    </>
+      <Home />
+    </ScreenClassProvider>
   );
 };

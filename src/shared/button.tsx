@@ -1,6 +1,15 @@
-import React from "react";
-import { StyledButton } from "../styles/button-styles";
+import React, { FC } from "react";
+import { StyledButton } from "./styles";
 
-export const Button = () => {
-  return <StyledButton theme="secondary">This is the button</StyledButton>;
+interface ButtonProps {
+  theme: "primary" | "secondary";
+  onClick?: (value: any) => void;
+}
+
+export const Button: FC<ButtonProps> = ({ theme, children, onClick }) => {
+  return (
+    <StyledButton theme={theme} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 };
