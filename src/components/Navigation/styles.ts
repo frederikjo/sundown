@@ -16,7 +16,6 @@ export const StyledLink = styled.a`
   color: ${colors.colors.primary};
   text-decoration: none;
   text-transform: uppercase;
-  margin: 0 auto;
 
   @media (min-width: 600px) {
     &:not(:first-child) {
