@@ -1,6 +1,14 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 import { StyledCard } from "../styles";
 
-export const Card = memo(({ children }) => {
-  return <StyledCard theme="secondary">{children}</StyledCard>;
+interface CardProps {
+  noGutter?: boolean;
+}
+
+export const Card: FC<CardProps> = memo(({ noGutter, children }) => {
+  return (
+    <StyledCard theme="secondary" noGutter={noGutter}>
+      {children}
+    </StyledCard>
+  );
 });

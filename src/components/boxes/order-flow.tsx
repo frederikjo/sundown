@@ -7,7 +7,9 @@ export const OrderFlow = () => {
   return (
     <Card>
       <Paragraph weight="bold">Order flow box</Paragraph>
-      <Button theme="primary">Order</Button>
+      <Button theme="primary" href="/pick-dish">
+        Order
+      </Button>
     </Card>
   );
 };

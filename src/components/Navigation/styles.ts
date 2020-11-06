@@ -16,7 +16,14 @@ export const StyledLink = styled.a`
   color: ${colors.colors.primary};
   text-decoration: none;
   text-transform: uppercase;
-  margin: 0 5%;
+  margin: 0 auto;
+
+  @media (min-width: 600px) {
+    &:not(:first-child) {
+      margin: 0 5%;
+    }
+  }
+
   &:hover {
     color: ${colors.colors.secondary};
   }
@@ -27,11 +34,9 @@ export const StyledHamburger = styled.button<{ open: boolean }>`
   height: 2rem;
   padding: 0;
   background: transparent;
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
   border: none;
   cursor: pointer;
   outline: none;
@@ -50,7 +55,7 @@ export const StyledHamburger = styled.button<{ open: boolean }>`
     transition: all 0.3s linear;
     transform-origin: 1px;
     background-color: ${({ open }) =>
-      open ? colors.colors.secondary : colors.colors.primary};
+      open ? colors.colors.primary : colors.colors.primary};
 
     :first-child {
       transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
@@ -73,7 +78,7 @@ export const StyledHamburgerMenu = styled.nav<{ open: boolean }>`
   height: 100vh;
   width: 35vw;
   position: fixed;
-  background-color: ${colors.colors.primary};
+  background-color: ${colors.colors.secondary};
   opacity: 0.5;
   z-index: 1;
 

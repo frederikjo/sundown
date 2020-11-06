@@ -17,7 +17,9 @@ export const Nav = () => {
       <Row>
         <Col xs={12}>
           <StyledNav>
-            <Logo />
+            <StyledLink href="/">
+              <Logo />
+            </StyledLink>
             <Hidden sm xs>
               <StyledLink href="/">Restauranter</StyledLink>
               <StyledLink href="/">Produkter</StyledLink>
@@ -27,9 +29,10 @@ export const Nav = () => {
             <Visible xs sm>
               <Hamburger open={open} setOpen={setOpen} />
               <StyledHamburgerMenu open={open}>
-                <StyledLink onClick={() => close()}>Link 1</StyledLink>
-                <StyledLink onClick={() => close()}>Link 2</StyledLink>
-                <StyledLink onClick={() => close()}>Link 3</StyledLink>
+                <StyledLink href="/">Restauranter</StyledLink>
+                <StyledLink href="/">Produkter</StyledLink>
+                <StyledLink href="/">Nyhedsbrev</StyledLink>
+                <StyledLink href="/">Kontakt</StyledLink>
               </StyledHamburgerMenu>
             </Visible>
           </StyledNav>

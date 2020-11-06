@@ -3,20 +3,21 @@ import styled from "styled-components";
 
 export const StyledButton = styled.a<{
   theme: "primary" | "secondary";
-  large?: boolean;
+  fixedSize?: boolean;
 }>`
   display: flex;
   justify-content: center;
   border-radius: 12px;
   color: #fff;
-  width: 150px;
+  width: ${({ fixedSize }) => (fixedSize ? `130px` : "auto")};
   border: none;
   cursor: pointer;
   outline: none;
-  padding: 5px 10px;
+  padding: 10px;
   font-weight: 600;
   text-transform: uppercase;
   transition: 0.1s all;
+  text-decoration: none;
 
   ${({ theme }) =>
     theme === "primary"
@@ -42,20 +43,22 @@ export const StyledParagraph = styled.p<{ weight: "light" | "bold" }>`
 
   ${({ weight }) =>
     weight === "light"
-      ? `font-weight: 500;`
+      ? `font-weight: 400;`
       : weight === "bold"
-      ? `font-weight: 700`
+      ? `font-weight: 800`
       : ""};
 `;
 
-export const StyledCard = styled.div`
+export const StyledCard = styled.div<{ noGutter?: boolean }>`
   padding: 10px;
-  border: 1px solid #000;
+  border: 2px solid #000;
   min-height: 250px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 10px 0;
+  overflow-y: scroll;
+  margin: ${({ noGutter }) => (noGutter ? "0 auto" : "0 auto 10px auto")};
 `;
 
 export const StyledImage = styled.img<{ width?: number; height?: number }>`

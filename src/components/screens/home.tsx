@@ -5,8 +5,10 @@ import { Card } from "../../shared/card";
 import { Button } from "../../shared/button";
 import styled from "styled-components";
 import { Paragraph } from "../../shared/paragraph";
-import { StyledHome } from ".";
 import Input from "../../shared/input";
+import { useFetch } from "../../api/hooks";
+import { ContentBox } from "../boxes/content-box";
+import { foodUrl } from "../../api/base-url";
 
 export const StyledSlidingImg = styled.img`
   display: block;
@@ -16,6 +18,14 @@ export const StyledSlidingImg = styled.img`
 `;
 
 export const Home = () => {
+  const res = useFetch(`${foodUrl}`, {});
+
+  if (!res.response) {
+    return <div>Loading...</div>;
+  }
+
+  const contentBoxResult = res.response.meals[0];
+
   return (
     <Container>
       <Row>
@@ -30,23 +40,14 @@ export const Home = () => {
         <Col xs={12} md={7}>
           <Card>
             <Paragraph weight="bold">Find your order</Paragraph>
-            <Input
-              onChange={() => console.log("pressed")}
-              placeholder="enter email"
-              type="search"
-            />
+            <Input placeholder="enter email" type="search" />
             <Button theme="primary" onClick={() => console.log("find clciked")}>
               Find
             </Button>
           </Card>
         </Col>
         <Col xs={12} md={5}>
-          <Card>
-            <div>
-              <Paragraph weight="light">lorem lipsum dollar sinar –</Paragraph>
-              <Paragraph weight="bold">content box</Paragraph>
-            </div>
-          </Card>
+          <ContentBox meal={contentBoxResult} />
         </Col>
       </Row>
     </Container>

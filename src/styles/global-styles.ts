@@ -11,4 +11,8 @@ export const GlobalStyle = createGlobalStyle`
   main {
 	  padding: 30px 0;
   }
+
+  a {
+	  text-decoration: none;
+  }
 `;
