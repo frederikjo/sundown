@@ -7,7 +7,6 @@ import { StyledNav, StyledLink, StyledHamburgerMenu } from "./styles";
 
 export const Nav = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const close = () => setOpen(false);
 
   const node = useRef<HTMLDivElement>(null);
   useOnClickOutside(node, () => setOpen(false));

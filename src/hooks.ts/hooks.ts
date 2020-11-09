@@ -1,4 +1,4 @@
-import { useEffect, RefObject, useState } from "react";
+import { useEffect, RefObject } from "react";
 
 export const useOnClickOutside = (
   ref: RefObject<HTMLDivElement>,
