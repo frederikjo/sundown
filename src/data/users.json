@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "first_name": "Yury",
+    "last_name": "Gagarin",
+    "code_name": "First Man",
+    "username": "yuga",
+    "email": "yuga@mtr.moon",
+    "password": "poleposition1",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Yuri_Gagarin_in_1963.jpg/640px-Yuri_Gagarin_in_1963.jpg"
+  },
+  {
+    "id": 2,
+    "first_name": "Alan",
+    "last_name": "Shepard",
+    "code_name": "Shepard",
+    "username": "alsh",
+    "email": "alsh@mtr.moon",
+    "password": "secret",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alan_Shepard_astronaut_in_spacesuit.jpg/640px-Alan_Shepard_astronaut_in_spacesuit.jpg"
+  },
+  {
+    "id": 3,
+    "first_name": "Valentina",
+    "last_name": "Tereshkova",
+    "code_name": "Valentine",
+    "username": "vate",
+    "email": "vate@mtr.moon",
+    "password": "DQ!cnRVYzQ64@Fwha!XB_kYn",
+    "avatar": "https:/upload.wikimedia.org/wikipedia/commons/thumb/6/61/RIAN_archive_612748_Valentina_Tereshkova.jpg/640px-RIAN_archive_612748_Valentina_Tereshkova.jpg"
+  },
+  {
+    "id": 4,
+    "first_name": "Guion",
+    "last_name": "Bluford",
+    "code_name": "Bluey",
+    "username": "gubl",
+    "email": "gubl@mtr.moon",
+    "password": "STS-8!Challenger1983",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Guion_Bluford.jpg/640px-Guion_Bluford.jpg"
+  },
+
+  {
+    "id": 5,
+    "first_name": "Andreas",
+    "last_name": "Mogensen",
+    "code_name": "Great Dane",
+    "username": "anmo",
+    "email": "anmo@mtr.moon",
+    "password": "rødgrødmedfløde",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/ISS-44_Andreas_Mogensen_in_the_Columbus_module.jpg/640px-ISS-44_Andreas_Mogensen_in_the_Columbus_module.jpg"
+  },
+  {
+    "id": 6,
+    "first_name": "Yi",
+    "last_name": "So-Yeon",
+    "code_name": "Neon",
+    "username": "yiso",
+    "email": "yiso@mtr.moon",
+    "password": "K2t@dACRkGCd3-UQQmCZJbTj",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg/640px-Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg"
+  },
+  {
+    "id": 7,
+    "first_name": "Yi",
+    "last_name": "So-Yeon",
+    "code_name": "Neon",
+    "username": "yiso",
+    "email": "foo@foo.foo",
+    "password": "foo",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg/640px-Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg"
+  }
+]
