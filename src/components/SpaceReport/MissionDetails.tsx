@@ -28,7 +28,6 @@ const MissionDetails: React.FC<MissionDetailsProps> = ({
       <div>
         <TextField
           label="Mission Name"
-          error={!missionName}
           value={missionName}
           onChange={(e) => setMissionName(e.target.value)}
           fullWidth
@@ -36,7 +35,6 @@ const MissionDetails: React.FC<MissionDetailsProps> = ({
           margin="normal"
         />
         <TextField
-          error={!missionDescription}
           label="Mission Description"
           value={missionDescription}
           onChange={(e) => setMissionDescription(e.target.value)}
@@ -50,6 +48,7 @@ const MissionDetails: React.FC<MissionDetailsProps> = ({
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           value={missionDate}
+          format="DD/MM/YYYY"
           onChange={(newValue: Dayjs | null) => {
             setMissionDate(newValue ? dayjs(newValue) : null);
           }}

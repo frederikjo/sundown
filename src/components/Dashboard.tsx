@@ -39,9 +39,10 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Welcome, {user?.first_name}!</h2>
-      <h3>Space Reports</h3>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 m-auto">
+      <div>
+        <h2>Welcome, {user?.first_name}!</h2>
+      </div>
       <SpaceReports />
     </div>
   );

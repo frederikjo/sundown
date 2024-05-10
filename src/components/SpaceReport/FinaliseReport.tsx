@@ -4,13 +4,16 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Image from "next/image";
 import dayjs, { Dayjs } from "dayjs";
+import { User } from "@/UserContext";
 
 export interface Image {
   id: string;
   url: string;
 }
 
-interface FinaliseReportProps {
+export interface SpaceReportType {
+  id?: string;
+  userId?: User | number | null;
   missionName: string;
   missionDescription: string;
   missionDate: Dayjs | null | undefined;
@@ -19,7 +22,7 @@ interface FinaliseReportProps {
   selectedImages: string[];
 }
 
-const FinaliseReport: React.FC<FinaliseReportProps> = ({
+const FinaliseReport: React.FC<SpaceReportType> = ({
   missionName,
   missionDescription,
   missionDate,

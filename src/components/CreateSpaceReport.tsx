@@ -6,32 +6,24 @@ import React, {
 } from "react";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
-import {
-  Button,
-  StepButton,
-  StepContent,
-  TextField,
-} from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Button, StepButton } from "@mui/material";
 import { Dayjs } from "dayjs";
-import SelectImages from "./SpaceReport/SpaceMissionImages";
 import MissionDetails from "./SpaceReport/MissionDetails";
 import SatelitePosition from "./SpaceReport/SatelitePosition";
 import SpaceMissionImages from "./SpaceReport/SpaceMissionImages";
-import FinaliseReport, { Image } from "./SpaceReport/FinaliseReport";
-// import DatePicker from "react-date-picker";
+import FinaliseReport, {
+  SpaceReportType,
+  Image,
+} from "./SpaceReport/FinaliseReport";
+import { useStore } from "@/stores/spaceReportsStore";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/UserContext";
 
 const steps = ["1", "2", "3", "4"];
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 const CreateSpaceReportPage: React.FC = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
+  const router = useRouter();
+  const { user } = useUser();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState<{
     [k: number]: boolean;
@@ -44,6 +36,10 @@ const CreateSpaceReportPage: React.FC = () => {
   >(null);
   const [lat, setLat] = useState<number | null>(null);
   const [long, setLong] = useState<number | null>(null);
+
+  const { addMissionData } = useStore() as {
+    addMissionData: (data: SpaceReportType) => void;
+  };
 
   const totalSteps = useMemo(() => {
     return steps.length;
@@ -77,7 +73,7 @@ const CreateSpaceReportPage: React.FC = () => {
     []
   );
 
-  const handleComplete = useCallback(() => {
+  const handleComplete = () => {
     if (
       activeStep === 0 &&
       (!missionName || !missionDescription || !missionDate)
@@ -89,39 +85,39 @@ const CreateSpaceReportPage: React.FC = () => {
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
     handleNext();
-  }, [
-    activeStep,
-    missionName,
-    missionDescription,
-    missionDate,
-    completed,
-    handleNext,
-  ]);
+
+    if (activeStep === steps.length - 1) {
+      const missionData = {
+        missionName,
+        missionDescription,
+        missionDate,
+        lat,
+        long,
+        selectedImages,
+        userId: user?.id,
+      };
+
+      addMissionData(missionData);
+
+      console.log({ missionData });
+      router.push("/dashboard");
+    }
+  };
 
   const handleReset = useCallback(() => {
     setActiveStep(0);
     setCompleted({});
   }, []);
 
-  useEffect(() => {
-    // Needed to prevent hydration mismatch
-    setIsMounted(true);
-  }, []);
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen m-auto">
-      {isMounted && (
-        <Stepper nonLinear activeStep={activeStep}>
-          {steps?.map((label, index) => (
-            <Step key={label} completed={completed[index]}>
-              <StepButton
-                color="inherit"
-                onClick={handleStep(index)}
-              />
-            </Step>
-          ))}
-        </Stepper>
-      )}
+      <Stepper nonLinear activeStep={activeStep}>
+        {steps?.map((label, index) => (
+          <Step key={label} completed={completed[index]}>
+            <StepButton color="inherit" onClick={handleStep(index)} />
+          </Step>
+        ))}
+      </Stepper>
       <div>
         {Object.keys(completed).length === totalSteps ? (
           <>
@@ -146,7 +142,9 @@ const CreateSpaceReportPage: React.FC = () => {
               />
             )}
 
-            {activeStep === 1 && <SpaceMissionImages onSelect={setSelectedImages} />}
+            {activeStep === 1 && (
+              <SpaceMissionImages onSelect={setSelectedImages} />
+            )}
             {activeStep === 2 && (
               <SatelitePosition
                 onPositionChange={handlePositionChange}

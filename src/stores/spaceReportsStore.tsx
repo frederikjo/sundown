@@ -1,52 +1,35 @@
-import { StateCreator } from "zustand";
-import { persist } from "zustand/middleware";
+import { SpaceReportType } from "@/components/SpaceReport/FinaliseReport";
 import { create as createZustandStore } from "zustand";
-import { SetStateAction } from "react";
-import { Dayjs } from "dayjs";
+import { persist } from "zustand/middleware";
+import { v4 as uuidv4 } from "uuid";
 
 type State = {
-  spaceReport: {
-    missionName: string;
-    missionDescription: string;
-    missionDate: Dayjs | null | undefined;
-    selectedImages: string[];
-    setMissionName: (name: string) => void;
-    setMissionDescription: (description: string) => void;
-    setMissionDate: (date: Dayjs | null | undefined) => void;
-    setSelectedImages: (images: string[]) => void;
-  };
-  setSpaceReport: (update: Partial<State["spaceReport"]>) => void;
+  missionData: SpaceReportType[];
+  addMissionData: (data: SpaceReportType) => void;
+  updateMission: (data: SpaceReportType) => void;
 };
 
-const initialState: State = {
-  spaceReport: {
-    selectedImages: [],
-    missionName: "",
-    missionDescription: "",
-    missionDate: null,
-    setMissionName: () => {},
-    setMissionDescription: () => {},
-    setMissionDate: () => {},
-    setSelectedImages: () => {},
-  },
-  setSpaceReport: () => {},
-};
-
-const localStorageKey = "spaceReportsStore";
-
-export const useStore = createZustandStore<State>(
-  persist<State>(
+export const useStore = createZustandStore(
+  persist(
     (set) => ({
-      ...initialState,
-      setSpaceReport: (update) =>
-        set((state) => ({
-          ...state,
-          spaceReport: { ...state.spaceReport, ...update },
+      missionData: [],
+      addMissionData: (data: SpaceReportType) =>
+        set((state: State) => ({
+          missionData: [
+            ...state.missionData,
+            { ...data, id: uuidv4() },
+          ],
+        })),
+      updateMission: (data: SpaceReportType) =>
+        set((state: State) => ({
+          missionData: state.missionData.map((mission) =>
+            mission.id === data.id ? data : mission
+          ),
         })),
     }),
     {
-      name: localStorageKey,
+      name: "missionDataStorage",
       getStorage: () => localStorage,
     }
-  ) as StateCreator<State>
+  )
 );
