@@ -1,8 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { authenticateUser } from "../services/userServices";
 import { useUser } from "../UserContext";
 import { useRouter } from "next/navigation";
+import { Button, TextField } from "@mui/material";
+import LOGO from "../public/images/logo.svg";
+import Image from "next/image";
 
 export const LoginForm: React.FC = () => {
   const router = useRouter();
@@ -10,10 +13,9 @@ export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("foo");
     e.preventDefault();
     try {
       const user = await authenticateUser(email, password);
@@ -30,25 +32,48 @@ export const LoginForm: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      router.push("/dashboard");
+    }
+  }, [user, router]);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className="flex flex-col items-center justify-center min-h-screen w-[248px] m-auto">
+      <Image src={LOGO} alt="LOGO" className="w-full p-0 m-0" />
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center w-full gap-4 mt-4"
+      >
+        <TextField
+          type="email"
+          placeholder="Email"
+          value={email}
+          className="bg-starry bg-gray-200"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          fullWidth
+        />
+        <TextField
+          type="password"
+          placeholder="Password"
+          value={password}
+          className="bg-starry bg-gray-200"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          fullWidth
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="outlined"
+          color="primary"
+        >
+          Login
+        </Button>
+        {error && <p>{error}</p>}
+      </form>
+    </div>
   );
 };
 

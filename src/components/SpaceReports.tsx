@@ -42,13 +42,13 @@ const SpaceReports: React.FC = () => {
 
   return (
     <div>
-      <ul>
-        {spaceReports.map((report) => (
+      {/* <ul>
+        {spaceReports?.map((report) => (
           <li key={report.id}>
             <strong>{report.title}</strong>: {report.description}
           </li>
         ))}
-      </ul>
+      </ul> */}
       <Button onClick={handleCreateSpaceReport}>
         Create New Space Report
       </Button>
