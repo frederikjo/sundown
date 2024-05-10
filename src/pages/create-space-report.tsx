@@ -4,4 +4,4 @@ const CreateSpaceReportPage = () => {
   return <CreateSpaceReport />;
 };
 
-export default CreateSpaceReport;
+export default CreateSpaceReportPage;

@@ -77,7 +77,6 @@ const SelectImages: React.FC<SelectImagesProps> = ({
                 (image: { img_src: string }) =>
                   !selectedImages.includes(image.img_src)
               )
-              .splice(0, 3)
               .map(
                 (
                   image: { img_src: string; id: string },

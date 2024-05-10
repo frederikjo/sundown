@@ -12,8 +12,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ lat, long }) => (
   <MapContainer
     center={[lat, long]}
     zoom={3}
-    className="h-[500px]"
-    style={{ width: "100%", height: "500px" }}
+    className="h-[500px] w-full"
   >
     <TileLayer
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

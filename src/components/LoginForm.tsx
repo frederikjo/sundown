@@ -77,7 +77,7 @@ export const LoginForm: React.FC = () => {
         >
           Login
         </Button>
-        {error && <p>{error}</p>}
+        {error && <p className="text-red-500">{error}</p>}
       </form>
     </div>
   );

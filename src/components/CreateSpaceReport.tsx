@@ -109,7 +109,6 @@ const CreateSpaceReportPage: React.FC = () => {
 
       addMissionData(missionData);
 
-      console.log({ missionData });
       router.push("/dashboard");
     }
   };
@@ -120,7 +119,7 @@ const CreateSpaceReportPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen m-auto max-w-[716px]">
+    <div className="flex flex-col items-center justify-center min-h-screen m-auto mt-5 max-w-[716px]">
       <Stepper nonLinear activeStep={activeStep}>
         {steps?.map((label, index) => (
           <Step key={label} completed={completed[index]}>

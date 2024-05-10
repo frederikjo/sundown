@@ -3,6 +3,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
+import React, { useCallback } from "react";
 
 interface MissionDetailsProps {
   missionName: string;
@@ -15,6 +16,8 @@ interface MissionDetailsProps {
   >;
 }
 
+const dateFormat = "DD/MM/YYYY";
+
 const MissionDetails: React.FC<MissionDetailsProps> = ({
   missionName,
   missionDescription,
@@ -23,13 +26,30 @@ const MissionDetails: React.FC<MissionDetailsProps> = ({
   setMissionDescription,
   setMissionDate,
 }) => {
+  const handleNameChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) =>
+      setMissionName(e.target.value),
+    [setMissionName]
+  );
+  const handleDescriptionChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) =>
+      setMissionDescription(e.target.value),
+    [setMissionDescription]
+  );
+  const handleDateChange = useCallback(
+    (newValue: Dayjs | null) => {
+      setMissionDate(newValue ? dayjs(newValue) : null);
+    },
+    [setMissionDate]
+  );
+
   return (
     <div className="flex items-center gap-4">
       <div>
         <TextField
           label="Mission Name"
           value={missionName}
-          onChange={(e) => setMissionName(e.target.value)}
+          onChange={handleNameChange}
           fullWidth
           required
           margin="normal"
@@ -37,7 +57,7 @@ const MissionDetails: React.FC<MissionDetailsProps> = ({
         <TextField
           label="Mission Description"
           value={missionDescription}
-          onChange={(e) => setMissionDescription(e.target.value)}
+          onChange={handleDescriptionChange}
           fullWidth
           required
           multiline
@@ -48,10 +68,8 @@ const MissionDetails: React.FC<MissionDetailsProps> = ({
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           value={missionDate}
-          format="DD/MM/YYYY"
-          onChange={(newValue: Dayjs | null) => {
-            setMissionDate(newValue ? dayjs(newValue) : null);
-          }}
+          format={dateFormat}
+          onChange={handleDateChange}
         />
       </LocalizationProvider>
     </div>

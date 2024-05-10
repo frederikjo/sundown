@@ -9,8 +9,9 @@ import { useStore } from "@/stores/spaceReportsStore";
 const SpaceReports: React.FC = () => {
   const { user } = useUser();
   const router = useRouter();
-  const { missionData } = useStore() as {
+  const { missionData, deleteMission } = useStore() as {
     missionData: SpaceReportType[];
+    deleteMission: (id: string) => void;
   };
 
   const userMissions = missionData.filter(
@@ -21,22 +22,41 @@ const SpaceReports: React.FC = () => {
     router.push("/create-space-report");
   };
 
+  const handleDeleteMission = (id: string) => {
+    deleteMission(id);
+  };
+
   return (
-    <div className="flex flex-col gap-4 max-w-[350px]">
+    <div className="flex flex-col gap-4 w-full max-w-[420px]">
       {userMissions.length > 0 && (
-        <div className="bg-starry bg-gray-200 border rounded shadow-md">
+        <div className="bg-starry w-full bg-gray-200 border rounded shadow-md">
           {userMissions.map((mission) => {
             return (
-              <Link
-                href={`/edit-space-report?id=${mission.id}`}
+              <div
                 key={mission.id}
-                className="hover:opacity-60 flex items-center justify-between p-2 p-4 border-b cursor-pointer"
+                className="flex items-center justify-between p-2 p-4 border-b cursor-pointer"
               >
                 <h2 className="line-clamp-1">
                   {mission.missionName}
                 </h2>
-                <div>Edit</div>
-              </Link>
+                <div>
+                  <Link
+                    href={`/edit-space-report?id=${mission.id}`}
+                    key={mission.id}
+                    className="hover:opacity-60"
+                  >
+                    <Button className="hover:opacity-6">Edit</Button>
+                  </Link>
+                  <Button
+                    onClick={() =>
+                      handleDeleteMission(mission?.id ?? "")
+                    }
+                    className="hover:opacity-60"
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
             );
           })}
         </div>

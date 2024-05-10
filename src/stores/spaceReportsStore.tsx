@@ -7,6 +7,7 @@ type State = {
   missionData: SpaceReportType[];
   addMissionData: (data: SpaceReportType) => void;
   updateMission: (data: SpaceReportType) => void;
+  deleteMission: (id: string) => void;
 };
 
 export const useStore = createZustandStore(
@@ -24,6 +25,12 @@ export const useStore = createZustandStore(
         set((state: State) => ({
           missionData: state.missionData.map((mission) =>
             mission.id === data.id ? data : mission
+          ),
+        })),
+      deleteMission: (id: string) =>
+        set((state: State) => ({
+          missionData: state.missionData.filter(
+            (mission) => mission.id !== id
           ),
         })),
     }),

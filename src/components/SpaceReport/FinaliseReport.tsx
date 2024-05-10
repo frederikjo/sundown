@@ -1,9 +1,10 @@
+import React, { FC, memo } from "react";
+import Image from "next/image";
+import dayjs, { Dayjs } from "dayjs";
 import { TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import Image from "next/image";
-import dayjs, { Dayjs } from "dayjs";
 import { User } from "@/UserContext";
 
 export interface Image {
@@ -22,7 +23,7 @@ export interface SpaceReportType {
   selectedImages: string[];
 }
 
-const FinaliseReport: React.FC<SpaceReportType> = ({
+const FinaliseReport: FC<SpaceReportType> = ({
   missionName,
   missionDescription,
   missionDate,
@@ -30,7 +31,6 @@ const FinaliseReport: React.FC<SpaceReportType> = ({
   long,
   selectedImages,
 }) => {
-  console.log(selectedImages);
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex flex-col w-full">
@@ -87,4 +87,4 @@ const FinaliseReport: React.FC<SpaceReportType> = ({
   );
 };
 
-export default FinaliseReport;
+export default memo(FinaliseReport);

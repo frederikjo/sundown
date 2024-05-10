@@ -59,15 +59,5 @@
     "email": "yiso@mtr.moon",
     "password": "K2t@dACRkGCd3-UQQmCZJbTj",
     "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg/640px-Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg"
-  },
-  {
-    "id": 7,
-    "first_name": "Yi",
-    "last_name": "So-Yeon",
-    "code_name": "Neon",
-    "username": "yiso",
-    "email": "foo@foo.foo",
-    "password": "foo",
-    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg/640px-Yi_So-yeon_%28NASA_-_JSC2008-E-004174%29.jpg"
   }
 ]

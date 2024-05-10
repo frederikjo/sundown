@@ -1,13 +1,15 @@
-// SatelitePosition.tsx
 import React, { useEffect, useState, Suspense } from "react";
 import useSWR from "swr";
 import { TextField } from "@mui/material";
 
 const MapComponent = React.lazy(() => import("./MapComponent"));
-
 interface SatelitePositionProps {
   onPositionChange: (lat: number, long: number) => void;
 }
+
+const apiUrl = "https://api.wheretheiss.at/v1/satellites/25544";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const SatelitePosition: React.FC<SatelitePositionProps> = ({
   onPositionChange,
@@ -16,13 +18,10 @@ const SatelitePosition: React.FC<SatelitePositionProps> = ({
   const [long, setLong] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const fetcher = (url: string) =>
-    fetch(url).then((res) => res.json());
-
-  const { data } = useSWR(
-    "https://api.wheretheiss.at/v1/satellites/25544",
-    fetcher
-  );
+  const { data, mutate } = useSWR(apiUrl, fetcher, {
+    // fetch ISS position every minute
+    refreshInterval: 60000,
+  });
 
   useEffect(() => {
     if (data) {
@@ -34,13 +33,24 @@ const SatelitePosition: React.FC<SatelitePositionProps> = ({
   }, [data, onPositionChange]);
 
   useEffect(() => {
-    const intervalId = setInterval(
-      () => fetcher("https://api.wheretheiss.at/v1/satellites/25544"),
-      60000 // Fetch data every minute
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        mutate();
+      }
+    };
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange
     );
 
-    return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, []);
+    return () => {
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange
+      );
+    };
+  }, [mutate]);
 
   return (
     <div className="flex flex-col gap-4">

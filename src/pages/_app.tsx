@@ -1,10 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import Head from "next/head";
 import type { AppProps } from "next/app";
 import { UserProvider, useUser } from "../UserContext";
 import Navbar from "@/components/Navbar";
 import LoginForm from "@/components/LoginForm";
 import "@/global.css";
+import clsx from "clsx";
 
 function App({ Component, pageProps, router }: AppProps) {
   return (
@@ -12,7 +13,7 @@ function App({ Component, pageProps, router }: AppProps) {
       <Head>
         <link rel="icon" href="/logo.svg" />
       </Head>
-      <AppContent
+      <MemoizedAppContent
         Component={Component}
         pageProps={pageProps}
         router={router}
@@ -21,16 +22,15 @@ function App({ Component, pageProps, router }: AppProps) {
   );
 }
 
-function AppContent({ Component, pageProps }: AppProps) {
+const AppContent = ({ Component, pageProps }: AppProps) => {
   const { user } = useUser();
 
   return (
     <div
-      className={
-        user
-          ? "bg-gray-300 min-h-screen bg-starry"
-          : "bg-gray-900 min-h-screen bg-starry"
-      }
+      className={clsx("min-h-screen bg-starry", {
+        "bg-gray-300": user,
+        "bg-gray-900": !user,
+      })}
     >
       {user ? (
         <>
@@ -42,6 +42,8 @@ function AppContent({ Component, pageProps }: AppProps) {
       )}
     </div>
   );
-}
+};
+
+const MemoizedAppContent = memo(AppContent);
 
 export default App;

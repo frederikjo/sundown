@@ -67,8 +67,6 @@ const EditSpaceReport: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(mission?.selectedImages);
-
   return (
     <div className="flex flex-col items-center justify-center w-full gap-4 px-6">
       <h1>Edit Mission</h1>
