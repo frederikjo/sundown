@@ -31,6 +31,7 @@ const CreateSpaceReportPage: React.FC = () => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [missionName, setMissionName] = useState("");
   const [missionDescription, setMissionDescription] = useState("");
+  const [editedSteps, setEditedSteps] = useState<number[]>([]);
   const [missionDate, setMissionDate] = useState<
     Dayjs | null | undefined
   >(null);
@@ -55,8 +56,12 @@ const CreateSpaceReportPage: React.FC = () => {
   }, [activeStep, totalSteps, completed]);
 
   const handleBack = useCallback(() => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  }, []);
+    setActiveStep((activeStep) => activeStep - 1);
+    setEditedSteps((prevEditedSteps) => [
+      ...prevEditedSteps,
+      activeStep,
+    ]);
+  }, [activeStep]);
 
   const handleStep = useCallback(
     (step: number) => () => {
@@ -80,8 +85,13 @@ const CreateSpaceReportPage: React.FC = () => {
     ) {
       return;
     }
+    if (editedSteps.includes(activeStep)) {
+      setEditedSteps(
+        editedSteps.filter((step) => step !== activeStep)
+      );
+    }
 
-    const newCompleted = completed;
+    const newCompleted = { ...completed, [activeStep]: true };
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
     handleNext();
@@ -110,7 +120,7 @@ const CreateSpaceReportPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen m-auto">
+    <div className="flex flex-col items-center justify-center min-h-screen m-auto max-w-[716px]">
       <Stepper nonLinear activeStep={activeStep}>
         {steps?.map((label, index) => (
           <Step key={label} completed={completed[index]}>
@@ -118,7 +128,7 @@ const CreateSpaceReportPage: React.FC = () => {
           </Step>
         ))}
       </Stepper>
-      <div>
+      <div className="w-full">
         {Object.keys(completed).length === totalSteps ? (
           <>
             <div className="mt-2 mb-1">
@@ -143,7 +153,11 @@ const CreateSpaceReportPage: React.FC = () => {
             )}
 
             {activeStep === 1 && (
-              <SpaceMissionImages onSelect={setSelectedImages} />
+              <SpaceMissionImages
+                onSelect={setSelectedImages}
+                isCompleted={completed[activeStep]}
+                initialImages={selectedImages}
+              />
             )}
             {activeStep === 2 && (
               <SatelitePosition
@@ -172,14 +186,20 @@ const CreateSpaceReportPage: React.FC = () => {
             Back
           </Button>
           <div className="flex-auto" />
-          <Button onClick={handleNext} sx={{ mr: 1 }}>
-            Next
-          </Button>
           {activeStep !== steps.length &&
             (completed[activeStep] ? (
-              <div className="inline-block">
-                Step {activeStep + 1} already completed
-              </div>
+              <Button
+                onClick={() => {
+                  setEditedSteps([...editedSteps, activeStep]);
+                  setCompleted((prevCompleted) => {
+                    const newCompleted = { ...prevCompleted };
+                    delete newCompleted[activeStep];
+                    return newCompleted;
+                  });
+                }}
+              >
+                Edit step
+              </Button>
             ) : (
               <Button onClick={handleComplete}>
                 {Object.keys(completed).length === steps.length - 1

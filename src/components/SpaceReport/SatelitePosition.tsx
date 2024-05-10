@@ -43,8 +43,8 @@ const SatelitePosition: React.FC<SatelitePositionProps> = ({
   }, []);
 
   return (
-    <div>
-      <div className="flex justify-center">
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-center gap-6 mt-4">
         <TextField
           label="Latitude"
           value={lat === null ? "" : lat.toFixed(2)}

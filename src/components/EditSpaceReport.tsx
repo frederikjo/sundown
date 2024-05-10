@@ -41,9 +41,15 @@ const EditSpaceReport: React.FC = () => {
           ...mission,
           selectedImages: selectedImages,
         });
+        router.push({
+          pathname: "/dashboard",
+          query: {
+            toastMessage: `${mission?.missionName} updated successfully`,
+          },
+        });
       }
     },
-    [mission, selectedImages, updateMission]
+    [mission, router, selectedImages, updateMission]
   );
 
   useEffect(() => {
@@ -64,9 +70,9 @@ const EditSpaceReport: React.FC = () => {
   console.log(mission?.selectedImages);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center w-full gap-4 px-6">
       <h1>Edit Mission</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col w-full">
         <div className="flex flex-col items-center gap-4">
           <div>
             <TextField
@@ -105,18 +111,23 @@ const EditSpaceReport: React.FC = () => {
               margin="normal"
             />
           </div>
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Mission Date"
-              value={mission.missionDate ? mission.missionDate : null}
-              onChange={(date) =>
+              format="DD/MM/YYYY"
+              value={
+                mission.missionDate
+                  ? dayjs(mission.missionDate)
+                  : null
+              }
+              onChange={(newValue: Dayjs | null) => {
                 setMission({
                   ...mission,
-                  missionDate: dayjs(date).format() as Dayjs,
-                })
-              }
+                  missionDate: newValue ? dayjs(newValue) : null,
+                });
+              }}
             />
-          </LocalizationProvider> */}
+          </LocalizationProvider>
           <div>
             <SpaceMissionImages
               onSelect={setSelectedImages}

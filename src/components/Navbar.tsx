@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import LOGO from "../public/images/logo.svg";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import { useUser } from "@/UserContext";
@@ -11,11 +10,12 @@ const Navbar: React.FC = () => {
     <nav className="bg-starry flex items-center justify-between p-4 text-white bg-gray-600 shadow-md">
       <div className="flex items-center gap-4">
         <Link href="/dashboard">
-          {" "}
           <Image
-            src={LOGO}
+            src="/logo.svg"
             alt="LOGO"
             className="w-[38px] p-0 m-0 rounded-md"
+            width="50"
+            height="50"
           />
         </Link>
         <Link href="/" passHref>

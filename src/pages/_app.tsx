@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import type { AppProps } from "next/app";
 import { UserProvider, useUser } from "../UserContext";
 import Navbar from "@/components/Navbar";
@@ -8,6 +9,9 @@ import "@/global.css";
 function App({ Component, pageProps, router }: AppProps) {
   return (
     <UserProvider>
+      <Head>
+        <link rel="icon" href="/logo.svg" />
+      </Head>
       <AppContent
         Component={Component}
         pageProps={pageProps}

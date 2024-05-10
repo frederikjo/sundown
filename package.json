@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.17",
     "@mui/material-nextjs": "^5.15.11",
     "@mui/x-date-pickers": "^7.3.2",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.11",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",

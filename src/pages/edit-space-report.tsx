@@ -1,7 +1,7 @@
 import EditSpaceReport from "@/components/EditSpaceReport";
 
-const EditMissionPage = () => {
+const EditSpaceReportPage = () => {
   return <EditSpaceReport />;
 };
 
-export default EditMissionPage;
+export default EditSpaceReportPage;

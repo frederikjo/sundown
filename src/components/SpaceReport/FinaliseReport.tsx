@@ -32,8 +32,8 @@ const FinaliseReport: React.FC<SpaceReportType> = ({
 }) => {
   console.log(selectedImages);
   return (
-    <div className="flex items-center gap-4">
-      <div>
+    <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col w-full">
         <TextField
           label="Mission Name"
           error={!missionName}
@@ -64,20 +64,24 @@ const FinaliseReport: React.FC<SpaceReportType> = ({
           fullWidth
           margin="normal"
         />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker label="Mission date" value={missionDate} />
+        </LocalizationProvider>
       </div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker value={missionDate} />
-      </LocalizationProvider>
-      <div>
-        {selectedImages?.map((image) => (
-          <Image
-            key={image}
-            src={image}
-            alt="Selected"
-            width={50}
-            height={50}
-          />
-        ))}
+      <span>Selected image</span>
+      <div className="flex flex-col flex-wrap items-center justify-center w-full h-full overflow-auto border-2 border-gray-400 shadow-sm">
+        <div className="flex flex-wrap">
+          {selectedImages?.map((image) => (
+            <Image
+              key={image}
+              src={image}
+              alt="Selected"
+              width={100}
+              height={100}
+              className="h-[150px] hover:p-2 w-1/4 p-1 transition-all duration-200 ease-in-out cursor-pointer"
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

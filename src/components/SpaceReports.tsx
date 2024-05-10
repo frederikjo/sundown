@@ -20,27 +20,26 @@ const SpaceReports: React.FC = () => {
   const handleCreateSpaceReport = () => {
     router.push("/create-space-report");
   };
-  console.log(userMissions, missionData);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 max-w-[350px]">
       {userMissions.length > 0 && (
-        <ul className="border rounded shadow-md">
+        <div className="bg-starry bg-gray-200 border rounded shadow-md">
           {userMissions.map((mission) => {
             return (
-              <li
+              <Link
+                href={`/edit-space-report?id=${mission.id}`}
                 key={mission.id}
-                className="hover:opacity-50 flex items-center justify-between p-4 border-b cursor-pointer"
+                className="hover:opacity-60 flex items-center justify-between p-2 p-4 border-b cursor-pointer"
               >
-                <h2>{mission.missionName}</h2>
-
-                <Link href={`/edit-mission?id=${mission.id}`}>
-                  <Button>Edit</Button>
-                </Link>
-              </li>
+                <h2 className="line-clamp-1">
+                  {mission.missionName}
+                </h2>
+                <div>Edit</div>
+              </Link>
             );
           })}
-        </ul>
+        </div>
       )}
       <Button onClick={handleCreateSpaceReport}>
         {userMissions.length > 0

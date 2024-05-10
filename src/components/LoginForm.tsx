@@ -4,7 +4,7 @@ import { authenticateUser } from "../services/userServices";
 import { useUser } from "../UserContext";
 import { useRouter } from "next/navigation";
 import { Button, TextField } from "@mui/material";
-import LOGO from "../public/images/logo.svg";
+
 import Image from "next/image";
 
 export const LoginForm: React.FC = () => {
@@ -40,7 +40,13 @@ export const LoginForm: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-[248px] m-auto">
-      <Image src={LOGO} alt="LOGO" className="w-full p-0 m-0" />
+      <Image
+        src="/logo.svg"
+        alt="LOGO"
+        width="50"
+        height="50"
+        className="w-full p-0 m-0"
+      />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center w-full gap-4 mt-4"
