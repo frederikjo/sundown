@@ -19,7 +19,6 @@ const SatelitePosition: React.FC<SatelitePositionProps> = ({
   const [loading, setLoading] = useState(true);
 
   const { data, mutate } = useSWR(apiUrl, fetcher, {
-    // fetch ISS position every minute
     refreshInterval: 60000,
   });
 

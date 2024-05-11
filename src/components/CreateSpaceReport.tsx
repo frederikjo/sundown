@@ -31,6 +31,7 @@ const CreateSpaceReportPage: React.FC = () => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [missionName, setMissionName] = useState("");
   const [missionDescription, setMissionDescription] = useState("");
+
   const [editedSteps, setEditedSteps] = useState<number[]>([]);
   const [missionDate, setMissionDate] = useState<
     Dayjs | null | undefined
@@ -45,6 +46,26 @@ const CreateSpaceReportPage: React.FC = () => {
   const totalSteps = useMemo(() => {
     return steps.length;
   }, []);
+
+  const stepRequirementsMet = useMemo(() => {
+    if (activeStep === 0) {
+      return (
+        missionName.length > 0 &&
+        missionDescription.length > 0 &&
+        missionDate !== null
+      );
+    }
+    if (activeStep === 1) {
+      return selectedImages.length > 0;
+    }
+    return true;
+  }, [
+    activeStep,
+    missionName,
+    missionDescription,
+    missionDate,
+    selectedImages,
+  ]);
 
   const handleNext = useCallback(() => {
     const newActiveStep =
@@ -200,7 +221,10 @@ const CreateSpaceReportPage: React.FC = () => {
                 Edit step
               </Button>
             ) : (
-              <Button onClick={handleComplete}>
+              <Button
+                onClick={handleComplete}
+                disabled={!stepRequirementsMet}
+              >
                 {Object.keys(completed).length === steps.length - 1
                   ? "Finish"
                   : "Complete Step"}
