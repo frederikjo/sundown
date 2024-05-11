@@ -28,7 +28,7 @@ const SelectImages: React.FC<SelectImagesProps> = ({
   };
 
   const { data } = useSWR(
-    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=hiugB55DCY4hyPr5NXsSVDzgewfgVL5obgziY8gK&sol=15",
+    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=DEMO_KEY&sol=15",
     fetcher
   );
 

@@ -58,7 +58,11 @@ const CreateSpaceReportPage: React.FC = () => {
     if (activeStep === 1) {
       return selectedImages.length > 0;
     }
-    return true;
+
+    if (activeStep === 2 || activeStep === 3) {
+      return true; // No requirements for steps 2 and 3
+    }
+    return false;
   }, [
     activeStep,
     missionName,
